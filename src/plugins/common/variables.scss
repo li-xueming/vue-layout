@@ -1,0 +1,7 @@
+// sidebar宽度
+$--sidebar-common-width: 200px;
+
+// 导出
+:export {
+  sidebar-common-width: $--sidebar-common-width;
+}
