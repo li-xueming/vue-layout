@@ -277,8 +277,8 @@ module.exports = {
     },
     // 自动打开浏览器
     open: true,
-    port: 3000,
-    host: '10.4.126.133'
+    port: 3000
+    // host: '10.4.126.133'
   }
   /**
    *  Name : parallel
