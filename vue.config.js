@@ -225,7 +225,10 @@ module.exports = {
   css: {
     loaderOptions: {
       sass: {
-        prependData: `@import "~@/plugins/common/variables.scss";`
+        prependData: `
+          @import "~@/plugins/css/variables.scss";
+          @import "~@/plugins/element/element-variables.scss";
+        `
       }
     }
   },
@@ -276,7 +279,7 @@ module.exports = {
       errors: true
     },
     // 自动打开浏览器
-    open: true,
+    open: false,
     port: 3000
     // host: '10.4.126.133'
   }

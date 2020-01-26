@@ -5,11 +5,10 @@
     :wrapStyle="scrollbar.wrapStyle"
     :native="false"
   >
+    <div @click="toggle" class="top-area">
+      <i :class="collapseIconClass"></i>
+    </div>
     <el-menu default-active="2" class="layout__menu" :collapse="isCollapse">
-      <el-menu-item @click="toggle">
-        <!-- <i :class="collapseIconClass"></i> -->
-        <i class="el-icon-s-unfold"></i>
-      </el-menu-item>
       <el-submenu index="1">
         <template slot="title">
           <i class="el-icon-location"></i>
@@ -92,7 +91,7 @@ export default {
   },
   computed: {
     collapseIconClass () {
-      return this.isCollapse ? 'el-icon-s-unfold' : 'el-icon-s-fold'
+      return !this.isCollapse ? 'el-icon-s-unfold is-reverse menu__expand_icon' : 'el-icon-s-unfold is-expand menu__expand_icon'
     }
   }
 }
@@ -105,14 +104,28 @@ export default {
       display: flex;
       justify-content: flex-start;
       align-items: stretch;
+      .top-area {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        height: 56px;
+        .menu__expand_icon {
+          transition: $--all-transition;
+          transform: rotate(0deg);
+        }
+        .is-reverse {
+          transform: rotate(180deg);
+        }
+      }
       .layout__menu {
-        height: 100vh;
+        height: calc(100vh - 56px);
       }
       .el-menu--collapse {
         width: calc(100% - 1px);
+        transition: $--all-transition;
       }
       .layout__menu:not(.el-menu--collapse) {
-        width: calc(100% - 1px);
+        width: calc(200px - 1px);
       }
     }
   }

@@ -1,6 +1,6 @@
 <template>
   <el-container class="layout-container">
-    <el-aside :width="sidebarCommonWidth" class="trans">
+    <el-aside class="transition" :width="sidebarCommonWidth">
       <sidebar></sidebar>
     </el-aside>
     <el-container>
@@ -33,8 +33,11 @@ export default {
   .layout-container {
     height: 100%;
     width: 100%;
-    .trans {
-      transition: width 1s;
-    }
+  }
+  .transition {
+    transition: $--all-transition;
+  }
+  .aside {
+    width: 200px;
   }
 </style>

@@ -1,7 +1,7 @@
 import LogUtils from '@/assets/js/utils/logUtil'
 
 import './element/element'
-import './common'
+import './css'
 // import './mock'
 import './axios'
 import './vuex-router-sync'
