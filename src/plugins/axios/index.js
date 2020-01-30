@@ -2,10 +2,9 @@ import AxiosPlugin from '@/plugins/axios/axiosPlugin'
 
 import Vue from 'vue'
 
-import LogUtils from '@/assets/js/utils/logUtil'
-
 Vue.use(AxiosPlugin, {
-  timeout: 500
+  timeout: 3000,
+  headers: { 'Accept': 'application/json' }
 })
 
-LogUtils.debug('system', '加载axios插件')
+export default AxiosPlugin.getInstance()

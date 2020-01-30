@@ -268,7 +268,20 @@ module.exports = {
             },
         */
     proxy: {
-      '/': {
+      '/github': {
+        target: 'https://github.com',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/github': ''
+        },
+        logLevel: 'debug'
+        // onProxyReq: function (proxyReq, req, res) {
+        // console.dir(proxyReq)
+        // console.dir(req)
+        // console.dir(res)
+        // }
+      },
+      '/api': {
         target: 'http://rap2api.taobao.org/app/mock/243069',
         changeOrigin: true
       }

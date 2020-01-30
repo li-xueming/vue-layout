@@ -35,6 +35,7 @@ const asyncRoutes = [
 routes = routes.concat(fullRoutes).concat(asyncRoutes)
 
 const router = new VueRouter({
+  mode: 'history',
   routes
 })
 

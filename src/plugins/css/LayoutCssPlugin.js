@@ -1,7 +1,8 @@
 import './common.scss'
 import variables from './variables.scss'
+import LogUtils from '@/assets/js/utils/logUtil'
 
-class LayoutStyle {
+class LayoutCssPlugin {
   install (Vue, option) {
     let { store, moduleName = 'styleVariables' } = option
     store.registerModule(moduleName, {
@@ -21,7 +22,8 @@ class LayoutStyle {
     //     }
     //   }
     // })
+    LogUtils.debug('system', '加载LayoutCssPlugin')
   }
 }
 
-export default new LayoutStyle()
+export default new LayoutCssPlugin()

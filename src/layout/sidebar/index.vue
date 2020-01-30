@@ -8,7 +8,7 @@
     <div @click="toggle" class="top-area">
       <i :class="collapseIconClass"></i>
     </div>
-    <el-menu default-active="2" class="layout__menu" :collapse="isCollapse">
+    <el-menu default-active="2" class="layout__menu" :collapse="isCollapse" router>
       <el-submenu index="1">
         <template slot="title">
           <i class="el-icon-location"></i>
@@ -98,35 +98,36 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .layout-sidebar {
-    height: 100vh;
-    .sidebar_view {
+.layout-sidebar {
+  height: 100vh;
+  .sidebar_view {
+    display: flex;
+    justify-content: flex-start;
+    align-items: stretch;
+    .top-area {
       display: flex;
       justify-content: flex-start;
-      align-items: stretch;
-      .top-area {
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        height: 56px;
-        .menu__expand_icon {
-          transition: $--all-transition;
-          transform: rotate(0deg);
-        }
-        .is-reverse {
-          transform: rotate(180deg);
-        }
-      }
-      .layout__menu {
-        height: calc(100vh - 56px);
-      }
-      .el-menu--collapse {
-        width: calc(100% - 1px);
+      align-items: center;
+      height: 56px;
+      padding: 0 20px;
+      .menu__expand_icon {
         transition: $--all-transition;
+        transform: rotate(0deg);
       }
-      .layout__menu:not(.el-menu--collapse) {
-        width: calc(200px - 1px);
+      .is-reverse {
+        transform: rotate(180deg);
       }
     }
+    .layout__menu {
+      height: calc(100vh - 56px);
+    }
+    .el-menu--collapse {
+      width: calc(100% - 1px);
+      transition: $--all-transition;
+    }
+    .layout__menu:not(.el-menu--collapse) {
+      width: calc(200px - 1px);
+    }
   }
+}
 </style>

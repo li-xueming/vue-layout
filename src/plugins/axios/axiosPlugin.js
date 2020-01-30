@@ -1,12 +1,17 @@
 /* eslint-disable no-unused-vars */
 import axios from 'axios'
 
+import LogUtils from '@/assets/js/utils/logUtil'
+
 class DispatcherError {
-  static dispatch ({ status, message, reason }) {
+  static dispatch (response) {
+    const { status, message, reason } = response
+    // console.dir(response)
     if (DispatcherError.handlers.has(status)) {
       let handler = DispatcherError.handlers.get(status)
-      handler(message, reason)
+      return handler(message, reason)
     }
+    return Promise.reject(new Error(message))
   }
 
   static handlers = new Map()
@@ -27,7 +32,7 @@ let responseInterceptors = {
   },
   error: error => {
     if (error.response) {
-      DispatcherError.dispatch(error.response)
+      return DispatcherError.dispatch(error.response)
     } else if (error.request) {
       return Promise.reject(error)
     }
@@ -37,18 +42,25 @@ let responseInterceptors = {
 
 class AxiosPlugin {
   install (Vue, option) {
-    let instance = axios.create(option)
+    this.instance = axios.create(option)
 
-    instance.interceptors.request.use(requestInterceptors.success, requestInterceptors.error)
-    instance.interceptors.response.use(responseInterceptors.success, responseInterceptors.error)
+    this.instance.interceptors.request.use(requestInterceptors.success, requestInterceptors.error)
+    this.instance.interceptors.response.use(responseInterceptors.success, responseInterceptors.error)
 
-    Vue.prototype.$axios = instance
-    Vue.prototype.$get = instance.get
-    Vue.prototype.$post = instance.post
-    Vue.prototype.$delete = instance.delete
-    Vue.prototype.$put = instance.put
-    Vue.prototype.$patch = instance.patch
+    Vue.prototype.$axios = this.instance
+    Vue.prototype.$get = this.instance.get
+    Vue.prototype.$post = this.instance.post
+    Vue.prototype.$delete = this.instance.delete
+    Vue.prototype.$put = this.instance.put
+    Vue.prototype.$patch = this.instance.patch
+    LogUtils.debug('system', '加载axios插件')
+  }
+
+  getInstance () {
+    return this.instance || new Error('未初始化')
   }
 }
 
-export default new AxiosPlugin()
+let AxiosPluginInstance = new AxiosPlugin()
+
+export default AxiosPluginInstance
